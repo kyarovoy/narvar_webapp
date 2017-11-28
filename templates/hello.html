@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>WebApp</title>
+    </head>
+    <body>
+        <h2>Team Members directory</h2>
+        <table border='1'>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Occupation</td>
+        </tr>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.occupation.name }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+        <h2>New Member</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message[1] }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form action="" method="post">
+            {{ form.csrf }}
+
+            <div class="input text">
+                {{ form.name.label }} {{ form.name }}
+            </div>
+
+           <div class="input text">
+                {{ form.email.label }} {{ form.email }}
+            </div>
+
+           <div class="input select">
+                {{ form.occupation.label }} {{ form.occupation }}
+            </div>
+
+            <div class="input submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </body>
+</html>
